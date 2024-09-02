@@ -71,5 +71,11 @@
         "changelog-version": "auto-changelog -c .auto-changelog -v",
         "grumphp": "./vendor/bin/grumphp run",
         "phpspec": "./vendor/bin/phpspec run"
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/dtisch/cas-lib"
+        }
+    ]
 }
