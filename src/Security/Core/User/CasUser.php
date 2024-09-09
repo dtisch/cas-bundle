@@ -16,6 +16,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 final class CasUser implements CasUserInterface, Stringable
 {
+
+    public array $roles = [];
+
     public function __construct(
         private readonly array $payload
     ) {}
@@ -49,7 +52,16 @@ final class CasUser implements CasUserInterface, Stringable
 
     public function getRoles(): array
     {
-        return ['ROLE_CAS_AUTHENTICATED'];
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_CAS_AUTHENTICATED
+        $roles[] = 'ROLE_CAS_AUTHENTICATED';
+
+        return array_unique($roles);
+    }
+
+    public function addRole(string $role): void
+    {
+        $this->roles[] = $role;
     }
 
     public function getSalt(): ?string
