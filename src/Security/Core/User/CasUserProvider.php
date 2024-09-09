@@ -63,7 +63,11 @@ final class CasUserProvider implements CasUserProviderInterface
             );
         }
 
-        return new CasUser($credentials['serviceResponse']['authenticationSuccess']);
+        $user = new CasUser($credentials['serviceResponse']['authenticationSuccess']);
+        //TODO: Add roles based on the user.
+        $user->addRole('ROLE_AD');
+
+        return $user;
     }
 
     public function loadUserByUsername(string $username): never
